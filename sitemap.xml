@@ -62,4 +62,12 @@
     <priority>0.8</priority>
   </url>
 
+  <!-- Articulo Blog: Construccion de Bodegas Comerciales en Choluteca -->
+  <url>
+    <loc>https://constructorainvar.com/blog/construccion-bodegas-comerciales-choluteca.html</loc>
+    <lastmod>2026-06-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
 </urlset>
