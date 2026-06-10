@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-PNLXJ7RZ');</script>
+    <!-- End Google Tag Manager -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog & Recursos | Constructora Invar Choluteca</title>
+    
+    <!-- SEO Mejorado -->
+    <meta name="description" content="Consejos de construcción, guías de costos reales actualizadas y estrategias de inversión inmobiliaria para proyectos en Choluteca y Zona Sur de Honduras.">
+    <meta name="keywords" content="blog construccion, choluteca, costos construccion 2026, invertir en bienes raices honduras, construir desde usa">
+    <meta name="author" content="Constructora Invar">
+
+    <!-- RUTAS RELATIVAS (../ para salir de la carpeta blog) -->
+    <link rel="icon" type="image/webp" href="../1.webp">
+    <link rel="apple-touch-icon" href="../1.webp">
+
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700;900&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+
+    <style>
+        body { font-family: 'Lato', sans-serif; }
+        h1, h2, h3, h4, h5, h6, .font-poppins { font-family: 'Poppins', sans-serif; }
+        
+        :root {
+            --accent-color: #FF9A00;
+            --main-color: #000000;
+        }
+
+        .accent-color { color: var(--accent-color); }
+        .bg-accent { background-color: var(--accent-color); }
+        .border-accent { border-color: var(--accent-color); }
+        .hover\:bg-accent-dark:hover { background-color: #E68A00; }
+        
+        .main-color { color: var(--main-color); }
+        .bg-main { background-color: var(--main-color); }
+        
+        .card-shadow { box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05), 0 4px 6px -2px rgba(0, 0, 0, 0.05); }
+        
+        .whatsapp-float { transition: all 0.3s ease; }
+        .whatsapp-float:hover { transform: scale(1.1); }
+
+        /* Animaciones Scroll Reveal (Misma lógica que script principal) */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease-out;
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body class="bg-gray-50 flex flex-col min-h-screen">
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PNLXJ7RZ"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+
+    <!-- BOTÓN WHATSAPP MEJORADO -->
+    <a href="javascript:void(0);" onclick="enviarWhatsApp();" aria-label="Contactar por WhatsApp" class="whatsapp-float fixed bottom-6 right-6 bg-green-500 text-white w-16 h-16 rounded-full flex items-center justify-center shadow-2xl z-50 border-2 border-white hover:bg-green-600 focus:outline-none focus:ring-4 focus:ring-green-300">
+        <i class="fab fa-whatsapp text-4xl" aria-hidden="true"></i>
+    </a>
+
+    <!-- CABECERA MEJORADA -->
+    <header class="bg-white shadow-sm sticky top-0 z-40 transition-all duration-300" id="main-header">
+        <nav class="container mx-auto px-6 py-3 flex justify-between items-center relative">
+            <div>
+                <a href="../index.html" aria-label="Inicio Constructora Invar">
+                    <img src="../1.webp" alt="Logo Constructora Invar" class="h-16 w-auto object-contain transition-transform hover:scale-105">
+                </a>
+            </div>
+            <!-- Menú Escritorio -->
+            <div class="hidden md:flex items-center space-x-8">
+                <a href="../index.html" class="text-gray-700 hover:text-accent-color font-medium transition-colors">Inicio</a>
+                <a href="../index.html#servicios" class="text-gray-700 hover:text-accent-color font-medium transition-colors">Servicios</a>
+                <a href="../index.html#portafolio" class="text-gray-700 hover:text-accent-color font-medium transition-colors">Proyectos</a>
+                <!-- Link activo -->
+                <a href="#" class="text-accent-color font-bold border-b-2 border-accent-color pb-1 transition-colors">Blog</a>
+                
+                <a href="../index.html#contacto" class="bg-accent text-white px-6 py-2.5 rounded-full font-bold hover:bg-accent-dark transition-all duration-300 shadow-md hover:shadow-lg transform hover:-translate-y-0.5">
+                    Iniciar Proyecto
+                </a>
+            </div>
+            <!-- Botón Menú Móvil -->
+            <div class="md:hidden">
+                <button id="mobile-menu-btn" aria-label="Abrir menú" aria-expanded="false" class="text-gray-800 hover:text-accent-color focus:outline-none p-2">
+                    <i class="fas fa-bars text-2xl"></i>
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <!-- MENÚ MÓVIL DESPLEGABLE -->
+    <div id="mobile-menu" class="fixed inset-0 bg-white z-50 hidden flex-col transition-opacity duration-300" aria-modal="true" role="dialog">
+        <div class="flex justify-end p-6">
+            <button id="mobile-menu-close" aria-label="Cerrar menú" class="text-gray-800 hover:text-accent-color focus:outline-none p-2">
+                <i class="fas fa-times text-3xl"></i>
+            </button>
+        </div>
+        <div class="flex flex-col items-center space-y-8 pt-10 text-xl font-poppins">
+            <a href="../index.html" class="mobile-link text-gray-800 hover:text-accent-color font-bold transition">Inicio</a>
+            <a href="../index.html#servicios" class="mobile-link text-gray-800 hover:text-accent-color font-bold transition">Servicios</a>
+            <a href="../index.html#portafolio" class="mobile-link text-gray-800 hover:text-accent-color font-bold transition">Proyectos</a>
+            <a href="#" class="mobile-link text-accent-color font-bold transition">Blog</a>
+            <a href="../index.html#contacto" class="mobile-link mt-4 bg-accent text-white px-8 py-3 rounded-full font-bold shadow-lg">Iniciar Proyecto</a>
+        </div>
+    </div>
+
+    <!-- HEADER BLOG DINÁMICO -->
+    <main class="flex-grow">
+        <section class="bg-gray-900 text-white py-24 relative overflow-hidden">
+            <div class="absolute inset-0 opacity-20" style="background-image: url('https://images.unsplash.com/photo-1503387762-592deb58ef4e?q=80&w=1600&auto=format&fit=crop'); background-size: cover; background-position: center; mix-blend-mode: overlay;"></div>
+            <div class="container mx-auto px-6 text-center relative z-10 reveal">
+                <span class="bg-accent text-white px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-widest mb-6 inline-block shadow-lg">Zona Sur Construye</span>
+                <h1 class="text-5xl md:text-6xl font-black font-poppins mb-6 tracking-tight">Biblioteca <span class="accent-color">Estratégica</span></h1>
+                <p class="text-xl md:text-2xl text-gray-300 max-w-2xl mx-auto font-light leading-relaxed">Información técnica y financiera de alto valor para que su inversión en Choluteca sea segura y totalmente rentable.</p>
+            </div>
+        </section>
+
+        <!-- LISTADO DE ARTÍCULOS (GRID) -->
+        <section class="py-24 bg-gray-50">
+            <div class="container mx-auto px-6">
+                
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-10">
+
+                    <!-- 1. NUEVO (TOP): Losacero -->
+                    <article class="bg-white rounded-2xl overflow-hidden card-shadow group cursor-pointer border border-gray-100 reveal delay-75">
+                        <div class="absolute top-4 right-4 bg-accent text-white text-xs font-black px-3 py-1.5 rounded-full shadow-lg z-10 uppercase tracking-wide">Nuevo</div>
+                        <a href="ventajas-losacero-construccion-industrial.html" class="flex flex-col h-full">
+                            <div class="h-60 overflow-hidden relative">
+                                <img loading="lazy" src="../img/blog/instalacion-losacero-invar-1.webp" alt="Instalación de Losacero Invar" class="w-full h-full object-cover transform group-hover:scale-105 transition duration-700">
+                                <div class="absolute inset-0 bg-accent opacity-0 group-hover:opacity-10 transition duration-300"></div>
+                            </div>
+                            <div class="p-8 flex flex-col flex-grow">
+                                <div class="flex items-center justify-between text-xs text-gray-500 mb-4 uppercase tracking-wider font-bold">
+                                    <span class="text-accent-color"><i class="fas fa-tools mr-2"></i>Ingeniería</span>
+                                    <span><i class="far fa-clock mr-1"></i> 4 min</span>
+                                </div>
+                                <h3 class="text-2xl font-bold main-color mb-4 font-poppins group-hover:text-accent-color transition-colors leading-tight">Entrepisos de Acero: El Sistema Losacero</h3>
+                                <p class="text-gray-600 text-sm mb-6 flex-grow leading-relaxed">¿Por qué la Losacero es el estándar en la construcción industrial? Descubra cómo acelerar su ROI con esta tecnología.</p>
+                                <span class="text-sm font-bold text-accent-color flex items-center mt-auto uppercase tracking-wide">Ver Detalle Técnico <i class="fas fa-arrow-right ml-2 transform group-hover:translate-x-1 transition-transform"></i></span>
+                            </div>
+                        </a>
+                    </article>
+
+                    <!-- 2. Guía Costos 2026 -->
+                    <article class="bg-white rounded-2xl overflow-hidden card-shadow group cursor-pointer border border-gray-100 reveal delay-100">
+                        <a href="guia-costos-construccion-2026.html" class="flex flex-col h-full">
+                            <div class="h-60 overflow-hidden relative">
+                                <img loading="lazy" src="https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?q=80&w=800&auto=format&fit=crop" alt="Calculadora costos" class="w-full h-full object-cover transform group-hover:scale-105 transition duration-700">
+                                <div class="absolute inset-0 bg-accent opacity-0 group-hover:opacity-10 transition duration-300"></div>
+                            </div>
+                            <div class="p-8 flex flex-col flex-grow">
+                                <div class="flex items-center justify-between text-xs text-gray-500 mb-4 uppercase tracking-wider font-bold">
+                                    <span class="text-accent-color"><i class="fas fa-chart-line mr-2"></i>Finanzas</span>
+                                    <span><i class="far fa-clock mr-1"></i> 5 min</span>
+                                </div>
+                                <h3 class="text-2xl font-bold main-color mb-4 font-poppins group-hover:text-accent-color transition-colors leading-tight">Guía 2026 de Costos de Construcción</h3>
+                                <p class="text-gray-600 text-sm mb-6 flex-grow leading-relaxed">Análisis detallado de precios por m² para Obra Gris y Llave en Mano. Evite sorpresas presupuestarias en su proyecto este año.</p>
+                                <span class="text-sm font-bold text-accent-color flex items-center mt-auto uppercase tracking-wide">Leer Análisis <i class="fas fa-arrow-right ml-2 transform group-hover:translate-x-1 transition-transform"></i></span>
+                            </div>
+                        </a>
+                    </article>
+
+                    <!-- 2. NUEVO (MEDIO): Trampa poquito a poco -->
+                    <article class="bg-white rounded-2xl overflow-hidden card-shadow group cursor-pointer border border-gray-100 reveal delay-[150ms]">
+                        <a href="trampa-poquito-a-poco.html" class="flex flex-col h-full">
+                            <div class="h-60 overflow-hidden relative">
+                                <img loading="lazy" src="https://images.unsplash.com/photo-1503387762-592deb58ef4e?q=80&w=800&auto=format&fit=crop" alt="Construcción abandonada" class="w-full h-full object-cover transform group-hover:scale-105 transition duration-700">
+                                <div class="absolute inset-0 bg-accent opacity-0 group-hover:opacity-10 transition duration-300"></div>
+                            </div>
+                            <div class="p-8 flex flex-col flex-grow">
+                                <div class="flex items-center justify-between text-xs text-gray-500 mb-4 uppercase tracking-wider font-bold">
+                                    <span class="text-accent-color"><i class="fas fa-exclamation-triangle mr-2"></i>Errores Comunes</span>
+                                    <span><i class="far fa-clock mr-1"></i> 5 min</span>
+                                </div>
+                                <h3 class="text-2xl font-bold main-color mb-4 font-poppins group-hover:text-accent-color transition-colors leading-tight">La trampa de construir "poquito a poco"</h3>
+                                <p class="text-gray-600 text-sm mb-6 flex-grow leading-relaxed">Descubra por qué construir su casa enviando remesas semana a semana puede costarle hasta el doble y paralizar su obra.</p>
+                                <span class="text-sm font-bold text-gray-800 group-hover:text-accent-color flex items-center mt-auto uppercase tracking-wide transition-colors">Leer Artículo <i class="fas fa-arrow-right ml-2 transform group-hover:translate-x-1 transition-transform"></i></span>
+                            </div>
+                        </a>
+                    </article>
+
+                    <!-- 3. MEDIO: Enero Obra Gris -->
+                    <article class="bg-white rounded-2xl overflow-hidden card-shadow group cursor-pointer border border-gray-100 reveal delay-200">
+                        <a href="construir-en-verano-choluteca.html" class="flex flex-col h-full">
+                            <div class="h-60 overflow-hidden relative">
+                                <img loading="lazy" src="https://images.unsplash.com/photo-1541888946425-d81bb19240f5?q=80&w=800&auto=format&fit=crop" alt="Construcción verano" class="w-full h-full object-cover transform group-hover:scale-105 transition duration-700">
+                                <div class="absolute inset-0 bg-accent opacity-0 group-hover:opacity-10 transition duration-300"></div>
+                            </div>
+                            <div class="p-8 flex flex-col flex-grow">
+                                <div class="flex items-center justify-between text-xs text-gray-500 mb-4 uppercase tracking-wider font-bold">
+                                    <span class="text-accent-color"><i class="fas fa-sun mr-2"></i>Estrategia</span>
+                                    <span><i class="far fa-clock mr-1"></i> 3 min</span>
+                                </div>
+                                <h3 class="text-2xl font-bold main-color mb-4 font-poppins group-hover:text-accent-color transition-colors leading-tight">Por qué Enero acelera su Obra Gris</h3>
+                                <p class="text-gray-600 text-sm mb-6 flex-grow leading-relaxed">El clima es dinero. Descubra cómo iniciar en temporada seca optimiza el rendimiento de maquinaria y previene sobrecostos térmicos.</p>
+                                <span class="text-sm font-bold text-gray-800 group-hover:text-accent-color flex items-center mt-auto uppercase tracking-wide transition-colors">Leer Artículo <i class="fas fa-arrow-right ml-2 transform group-hover:translate-x-1 transition-transform"></i></span>
+                            </div>
+                        </a>
+                    </article>
+
+                    <!-- 3. VIEJO (BOTTOM): Construir desde USA -->
+                    <article class="bg-white rounded-2xl overflow-hidden card-shadow group cursor-pointer border border-gray-100 reveal delay-300">
+                        <a href="construir-desde-usa.html" class="flex flex-col h-full">
+                            <div class="h-60 overflow-hidden relative">
+                                <img loading="lazy" src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?q=80&w=800&auto=format&fit=crop" alt="Llaves casa" class="w-full h-full object-cover transform group-hover:scale-105 transition duration-700">
+                                <div class="absolute inset-0 bg-accent opacity-0 group-hover:opacity-10 transition duration-300"></div>
+                            </div>
+                            <div class="p-8 flex flex-col flex-grow">
+                                <div class="flex items-center justify-between text-xs text-gray-500 mb-4 uppercase tracking-wider font-bold">
+                                    <span class="text-accent-color"><i class="fas fa-globe-americas mr-2"></i>Diáspora</span>
+                                    <span><i class="far fa-clock mr-1"></i> 6 min</span>
+                                </div>
+                                <h3 class="text-2xl font-bold main-color mb-4 font-poppins group-hover:text-accent-color transition-colors leading-tight">Construir desde USA sin ser estafado</h3>
+                                <p class="text-gray-600 text-sm mb-6 flex-grow leading-relaxed">Metodología de auditoría web y gestión remota segura para compatriotas en el extranjero que desean construir su patrimonio.</p>
+                                <span class="text-sm font-bold text-gray-800 group-hover:text-accent-color flex items-center mt-auto uppercase tracking-wide transition-colors">Leer Protocolo <i class="fas fa-arrow-right ml-2 transform group-hover:translate-x-1 transition-transform"></i></span>
+                            </div>
+                        </a>
+                    </article>
+
+                </div>
+
+                <!-- NEWSLETTER / LEAD MAGNET -->
+                <div class="mt-24 bg-white rounded-2xl p-10 md:p-16 text-center border-t-4 border-accent shadow-2xl reveal relative overflow-hidden">
+                    <div class="absolute -right-10 -top-10 text-gray-50 opacity-10">
+                        <i class="fas fa-hard-hat text-9xl"></i>
+                    </div>
+                    <h3 class="text-3xl font-bold main-color mb-4 font-poppins relative z-10">¿Planea construir en 2026?</h3>
+                    <p class="text-gray-600 mb-8 max-w-2xl mx-auto text-lg relative z-10">No cotice a ciegas. Comuníquese directamente con nuestro equipo de ingeniería y reciba un asesoramiento inicial honesto sobre su proyecto.</p>
+                    <button onclick="enviarWhatsApp();" class="bg-accent text-white font-bold py-4 px-10 rounded-xl hover:bg-accent-dark hover:shadow-lg transition-all transform hover:-translate-y-1 inline-flex items-center justify-center text-lg relative z-10">
+                        <i class="fab fa-whatsapp text-2xl mr-3"></i> Consultar a un Ingeniero Hoy
+                    </button>
+                    <p class="text-xs text-gray-400 mt-6 relative z-10 uppercase tracking-widest font-bold">Transparencia Total por WhatsApp</p>
+                </div>
+
+            </div>
+        </section>
+    </main>
+
+    <!-- FOOTER MEJORADO -->
+    <footer class="bg-gray-900 text-gray-400 py-16 border-t border-gray-800 mt-auto">
+        <div class="container mx-auto px-6">
+            <div class="grid md:grid-cols-3 gap-10 mb-10">
+                <div class="text-center md:text-left">
+                    <img src="../1.webp" alt="Constructora Invar Logo" class="h-16 w-auto mx-auto md:mx-0 mb-6 grayscale hover:grayscale-0 transition duration-300">
+                    <p class="mb-4 text-sm max-w-xs mx-auto md:mx-0">La Formalidad Ágil de Choluteca. Integramos ingeniería, arquitectura y administración de primer nivel.</p>
+                </div>
+                <div class="text-center md:text-left">
+                    <h4 class="text-white font-bold text-lg mb-4 font-poppins">Navegación</h4>
+                    <ul class="space-y-2">
+                        <li><a href="../index.html#servicios" class="hover:text-accent-color transition">Servicios</a></li>
+                        <li><a href="../index.html#misiones" class="hover:text-accent-color transition">Misiones</a></li>
+                        <li><a href="../index.html#portafolio" class="hover:text-accent-color transition">Proyectos</a></li>
+                        <li><a href="#" class="text-accent-color font-medium">Blog</a></li>
+                    </ul>
+                </div>
+                <div class="text-center md:text-left">
+                    <h4 class="text-white font-bold text-lg mb-4 font-poppins">Contacto</h4>
+                    <ul class="space-y-3">
+                        <li class="flex items-center justify-center md:justify-start">
+                            <i class="fas fa-map-marker-alt w-6 text-accent-color"></i> Zona Sur, Choluteca, HN
+                        </li>
+                        <li class="flex items-center justify-center md:justify-start">
+                            <i class="fab fa-whatsapp w-6 text-accent-color text-lg"></i> <a href="https://wa.me/50495086729" class="hover:text-white transition">+504 9508-6729</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-gray-800 pt-8 text-center flex flex-col md:flex-row justify-between items-center text-xs">
+                <p>&copy; 2026 Constructora Invar. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- LÓGICA FRONTEND COMPARTIDA -->
+    <script src="../js/script.js"></script>
+    <script>
+        function enviarWhatsApp() {
+            const url = "https://wa.me/50495086729?text=Hola,%20quisiera%20m%C3%A1s%20informaci%C3%B3n%20sobre%20sus%20modelos%20de%20inversi%C3%B3n%20y%20asistencia%20ingenieril.";
+            window.open(url, '_blank');
+        }
+    </script>
+</body>
+</html>

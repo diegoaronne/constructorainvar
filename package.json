@@ -1,0 +1,12 @@
+{
+  "name": "constructorainvar",
+  "version": "1.0.0",
+  "description": "Sitio web Constructora Invar",
+  "scripts": {
+    "build:css": "tailwindcss -i ./input.css -o ./css/style.css --minify",
+    "watch:css": "tailwindcss -i ./input.css -o ./css/style.css --watch"
+  },
+  "devDependencies": {
+    "tailwindcss": "^3.4.1"
+  }
+}

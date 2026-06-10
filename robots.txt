@@ -1,0 +1,36 @@
+# robots.txt para Constructora Invar - constructorainvar.com
+# Optimizado para Google Maps y SEO Local
+
+User-agent: *
+Allow: /
+Allow: /blog/
+Allow: /img/
+
+# Bloquear archivos temporales y de desarrollo
+Disallow: /temp/
+Disallow: /backup/
+Disallow: /*.pdf$
+Disallow: /admin/
+Disallow: /private/
+
+# Sitemap principal
+Sitemap: https://constructorainvar.com/sitemap.xml
+
+# Crawl-delay para bots pesados
+User-agent: AhrefsBot
+Crawl-delay: 10
+
+User-agent: SemrushBot
+Crawl-delay: 10
+
+# Permitir acceso completo a Google (importante para Google Maps)
+User-agent: Googlebot
+Allow: /
+Allow: /img/
+
+User-agent: Googlebot-Image
+Allow: /img/
+
+# Permitir acceso a Google Maps
+User-agent: APIs-Google
+Allow: /
