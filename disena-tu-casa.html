@@ -1,0 +1,666 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Diseñá tu casa | Constructora Invar</title>
+<meta name="description" content="Diseñá tu casa ideal: elegí habitaciones, baños, espacio para vehículos y estilo arquitectónico, y enviá tu idea directo a un asesor de Constructora Invar por WhatsApp.">
+
+<!-- Fuentes e iconos (igual que el sitio Invar) -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700;900&family=Lato:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+<!-- ====== SOLO PARA VISTA PREVIA ======
+     Para producción: borrá las 2 líneas de Tailwind de abajo, poné
+     <link rel="stylesheet" href="css/style.css"> y corré: npm run build:css -->
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+tailwind.config={theme:{extend:{
+  colors:{accent:'#FF9A00','accent-dark':'#E68A00',main:'#000000'},
+  fontFamily:{poppins:['Poppins','sans-serif'],lato:['Lato','sans-serif']}
+}}};
+</script>
+<!-- ==================================== -->
+
+<style>
+  /* --- Bloque de estilo idéntico al de Invar --- */
+  body { font-family: 'Lato', sans-serif; }
+  h1, h2, h3, h4, h5, h6, .font-poppins { font-family: 'Poppins', sans-serif; }
+  :root { --accent-color:#FF9A00; --main-color:#000000; }
+  .accent-color { color: var(--accent-color); }
+  .bg-accent { background-color: var(--accent-color); }
+  .border-accent { border-color: var(--accent-color); }
+  .hover\:bg-accent-dark:hover { background-color:#E68A00; }
+  .main-color { color: var(--main-color); }
+  .card-shadow { box-shadow:0 10px 15px -3px rgba(0,0,0,.05),0 4px 6px -2px rgba(0,0,0,.05); }
+  .whatsapp-float { transition: all .3s ease; }
+  .whatsapp-float:hover { transform: scale(1.1); }
+  .reveal { opacity:0; transform: translateY(28px); transition: all .7s ease-out; }
+  .reveal.active { opacity:1; transform: translateY(0); }
+
+  /* --- Componentes del configurador --- */
+  .step-num{width:42px;height:42px;border-radius:12px;background:var(--accent-color);color:#fff;font-family:'Poppins';font-weight:900;display:flex;align-items:center;justify-content:center;font-size:20px;flex:0 0 auto}
+  .step-btn{width:40px;height:40px;border-radius:11px;border:1.5px solid #E68A00;color:var(--accent-color);font-weight:700;font-size:22px;line-height:1;display:flex;align-items:center;justify-content:center;background:#fff;transition:all .15s;cursor:pointer}
+  .step-btn:hover{background:var(--accent-color);color:#fff}
+  .step-btn:focus-visible{outline:3px solid #FFCF8A;outline-offset:2px}
+  .seg{display:inline-flex;background:#F3F4F6;border-radius:13px;padding:4px;gap:4px;flex-wrap:wrap}
+  .seg-opt{padding:9px 18px;border-radius:10px;font-family:'Poppins';font-weight:700;color:#6B7280;font-size:14px;background:transparent;border:none;cursor:pointer;transition:all .15s}
+  .seg-opt.active{background:var(--accent-color);color:#fff;box-shadow:0 3px 8px rgba(255,154,0,.4)}
+  .style-card{cursor:pointer;border:2px solid #EFEFEF;border-radius:1rem;background:#fff;overflow:hidden;transition:all .2s}
+  .style-card:hover{transform:translateY(-4px);box-shadow:0 16px 30px -18px rgba(0,0,0,.4)}
+  .style-card.sel{border-color:var(--accent-color);box-shadow:0 0 0 4px rgba(255,154,0,.2)}
+  .style-card .frame{position:relative;background:#F7F8FA;border-bottom:1px solid #EEE;padding:8px 8px 0}
+  .style-card svg.house{display:block;width:100%;height:auto}
+  .style-card .check{position:absolute;top:12px;right:12px;width:34px;height:34px;border-radius:50%;background:var(--accent-color);color:#fff;display:flex;align-items:center;justify-content:center;opacity:0;transform:scale(.5);transition:all .2s;box-shadow:0 4px 10px rgba(255,154,0,.5)}
+  .style-card.sel .check{opacity:1;transform:scale(1)}
+  .clim{position:absolute;top:12px;left:12px;font-size:10.5px;font-weight:700;letter-spacing:.02em;padding:4px 9px;border-radius:30px;background:rgba(255,255,255,.92);color:#6B7280;border:1px solid #E5E7EB}
+  .sw span{display:inline-block;width:20px;height:20px;border-radius:5px;border:1px solid rgba(0,0,0,.1)}
+  .field{width:100%;padding:.75rem 1rem;border-radius:.6rem;border:1px solid #D1D5DB;color:#111827;outline:none;transition:box-shadow .15s,border-color .15s;font-family:'Lato'}
+  .field:focus{border-color:var(--accent-color);box-shadow:0 0 0 3px rgba(255,154,0,.3)}
+  .scrim{position:fixed;inset:0;background:rgba(0,0,0,.6);display:none;align-items:flex-start;justify-content:center;padding:16px;z-index:60;overflow-y:auto}
+  .scrim.open{display:flex}
+  @media(prefers-reduced-motion:reduce){*{transition:none!important}.reveal{opacity:1;transform:none}}
+</style>
+</head>
+<body class="bg-white text-gray-800">
+
+<!-- Botón flotante WhatsApp (patrón Invar) -->
+<a href="https://wa.me/50495086729?text=Hola,%20quisiera%20m%C3%A1s%20informaci%C3%B3n%20sobre%20Constructora%20Invar" target="_blank" rel="noopener" aria-label="Contactar por WhatsApp" class="whatsapp-float fixed bottom-6 right-6 bg-green-500 text-white w-16 h-16 rounded-full flex items-center justify-center shadow-2xl z-50 border-2 border-white hover:bg-green-600">
+  <i class="fab fa-whatsapp text-4xl" aria-hidden="true"></i>
+</a>
+
+<!-- Header -->
+<header class="bg-white shadow-sm sticky top-0 z-40">
+  <nav class="container mx-auto px-6 py-3 flex justify-between items-center">
+    <a href="index.html" class="flex items-center gap-3">
+      <img src="https://constructorainvar.com/1.webp" onerror="this.style.display='none';document.getElementById('logotxt').style.display='inline'" alt="Constructora Invar" class="h-14 w-auto object-contain">
+      <span id="logotxt" class="font-poppins font-black text-xl main-color" style="display:none">CONSTRUCTORA INVAR</span>
+    </a>
+    <a href="index.html" class="text-sm font-bold text-gray-600 hover:accent-color transition flex items-center gap-2">
+      <i class="fas fa-arrow-left"></i> Volver al sitio
+    </a>
+  </nav>
+</header>
+
+<main>
+  <!-- Intro -->
+  <section class="py-16 md:py-20 bg-white">
+    <div class="container mx-auto px-6 text-center reveal">
+      <span class="accent-color font-bold tracking-wider uppercase text-sm">Diseño a tu medida</span>
+      <h1 class="text-4xl md:text-6xl font-black main-color mt-3 leading-tight">Diseñá tu casa ideal</h1>
+      <p class="text-xl text-gray-600 max-w-2xl mx-auto mt-5">Decinos cómo la imaginás —cuántos cuartos, baños, espacio para vehículos y qué estilo te gusta— y un asesor de Invar te contacta con una idea clara de tu proyecto. Sin costo y sin compromiso.</p>
+      <div class="flex flex-wrap justify-center gap-x-8 gap-y-2 mt-7 text-sm font-bold text-gray-500">
+        <span><i class="fas fa-1 accent-color mr-1"></i> Tus necesidades</span>
+        <span><i class="fas fa-2 accent-color mr-1"></i> Tu estilo</span>
+        <span><i class="fas fa-3 accent-color mr-1"></i> Te contactamos</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- PASO 1: Necesidades -->
+  <section class="pb-8 bg-white">
+    <div class="container mx-auto px-6 max-w-3xl reveal">
+      <div class="flex items-center gap-4 mb-7">
+        <span class="step-num">1</span>
+        <div>
+          <h2 class="text-2xl md:text-3xl font-bold main-color">¿Qué necesitás en tu casa?</h2>
+          <p class="text-gray-500">Ajustá los números a tu gusto.</p>
+        </div>
+      </div>
+      <div class="bg-white rounded-2xl card-shadow border border-gray-100 p-6 md:p-8 space-y-4">
+        <div id="steppers" class="space-y-4"></div>
+
+        <div class="pt-2">
+          <label class="block text-sm font-bold text-gray-700 mb-2">Niveles</label>
+          <div class="seg" data-field="pisos">
+            <button type="button" class="seg-opt active" data-val="1 planta">1 planta</button>
+            <button type="button" class="seg-opt" data-val="2 plantas">2 plantas</button>
+          </div>
+        </div>
+
+        <div>
+          <label class="block text-sm font-bold text-gray-700 mb-2">¿Ya tenés el terreno?</label>
+          <div class="seg" data-field="terreno">
+            <button type="button" class="seg-opt active" data-val="Sí, ya tengo terreno">Sí, ya lo tengo</button>
+            <button type="button" class="seg-opt" data-val="Aún no tengo terreno">Aún no</button>
+          </div>
+        </div>
+
+        <div>
+          <label for="ubicacion" class="block text-sm font-bold text-gray-700 mb-2">¿Dónde sería el proyecto? <span class="font-normal text-gray-400">(opcional)</span></label>
+          <div class="relative">
+            <span class="absolute inset-y-0 left-0 pl-3 flex items-center text-gray-400"><i class="fas fa-map-marker-alt"></i></span>
+            <input type="text" id="ubicacion" class="field pl-10" placeholder="Ej: Choluteca, col. El Pedregal">
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PASO 2: Estilo -->
+  <section class="py-12 bg-white">
+    <div class="container mx-auto px-6 reveal">
+      <div class="flex items-center gap-4 mb-7 max-w-3xl mx-auto">
+        <span class="step-num">2</span>
+        <div>
+          <h2 class="text-2xl md:text-3xl font-bold main-color">Elegí el estilo que te enamora</h2>
+          <p class="text-gray-500">Tocá <strong>Ver interior</strong> para conocer cada casa por dentro. Después seleccioná tu favorita.</p>
+        </div>
+      </div>
+      <div id="gallery" class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 max-w-6xl mx-auto"></div>
+    </div>
+  </section>
+
+  <!-- PASO 3: Datos + envío -->
+  <section class="py-12 pb-24 bg-gray-50">
+    <div class="container mx-auto px-6 max-w-3xl reveal">
+      <div class="flex items-center gap-4 mb-7">
+        <span class="step-num">3</span>
+        <div>
+          <h2 class="text-2xl md:text-3xl font-bold main-color">Enviá tu idea por WhatsApp</h2>
+          <p class="text-gray-500">Revisá el resumen y listo — un asesor te atiende de una vez.</p>
+        </div>
+      </div>
+
+      <div class="bg-white rounded-2xl card-shadow border-t-4 border-accent p-6 md:p-8">
+        <div>
+          <label for="notas" class="block text-sm font-bold text-gray-700 mb-2">¿Algo más que querás contarnos? <span class="font-normal text-gray-400">(opcional)</span></label>
+          <textarea id="notas" rows="2" class="field" placeholder="Ej: me gustaría jardín, un cuarto de oficina, piscina..."></textarea>
+        </div>
+
+        <!-- Resumen en vivo -->
+        <div class="mt-5 bg-orange-50 border border-orange-100 rounded-xl p-4">
+          <p class="text-xs font-bold uppercase tracking-wider text-gray-500 mb-2"><i class="fas fa-clipboard-list accent-color mr-1"></i> Resumen de tu idea</p>
+          <p id="resumen" class="text-gray-700 font-medium leading-relaxed text-[15px]"></p>
+        </div>
+
+        <button type="button" id="enviar" class="w-full bg-accent text-white px-8 py-4 rounded-xl text-lg font-bold hover:bg-accent-dark hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1 mt-5 flex items-center justify-center">
+          <i class="fab fa-whatsapp mr-3 text-2xl"></i> Enviar mi idea por WhatsApp
+        </button>
+        <p class="text-center text-xs text-gray-400 mt-3">Se abre WhatsApp con tu mensaje listo. Solo le das enviar.</p>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- Footer (patrón Invar) -->
+<footer class="bg-gray-900 text-gray-400 py-14 border-t border-gray-800">
+  <div class="container mx-auto px-6 text-center">
+    <h4 class="text-white font-bold text-lg mb-3 font-poppins">Constructora Invar</h4>
+    <p class="text-sm max-w-md mx-auto mb-5">La formalidad ágil de Choluteca. Integramos ingeniería, arquitectura y administración de primera categoría.</p>
+    <p class="text-sm"><i class="fab fa-whatsapp accent-color mr-1"></i> <a href="https://wa.me/50495086729" class="hover:text-white transition">+504 9508-6729</a> &nbsp;·&nbsp; <i class="fas fa-map-marker-alt accent-color mr-1"></i> Zona Sur, Choluteca, HN</p>
+    <p class="text-xs mt-6">&copy; 2026 Constructora Invar. Todos los derechos reservados.</p>
+  </div>
+</footer>
+
+<!-- Modal interior -->
+<div class="scrim" id="scrim" role="dialog" aria-modal="true" aria-labelledby="m-title">
+  <div class="bg-white rounded-2xl max-w-3xl w-full overflow-hidden shadow-2xl my-4" id="modal"></div>
+</div>
+
+<script>
+const GLASS="#CBD9DA";
+function ground(){return '<line x1="24" y1="186" x2="296" y2="186" stroke="#211E19" stroke-opacity=".14" stroke-width="2"/>';}
+
+const STYLES=[
+{
+  id:"tudor", name:"Tudor", accent:"#6E4A33",
+  tagline:"La casa de cuento europeo: techos empinados y vigas a la vista.",
+  climate:"Mejor clima fresco",
+  swatches:["#3B2F26","#E8E0D0","#9B5B43","#4A4742"],
+  exterior:ground()+`
+    <rect x="150" y="122" width="76" height="64" fill="#E8E0D0"/>
+    <polygon points="146,126 188,94 230,126" fill="#4A4742"/>
+    <rect x="84" y="100" width="80" height="86" fill="#E8E0D0"/>
+    <rect x="84" y="156" width="80" height="30" fill="#9B5B43"/>
+    <polygon points="74,104 124,52 174,104" fill="#4A4742"/>
+    <polygon points="82,104 124,60 166,104" fill="#E8E0D0"/>
+    <line x1="124" y1="62" x2="124" y2="104" stroke="#3B2F26" stroke-width="4"/>
+    <line x1="124" y1="80" x2="100" y2="104" stroke="#3B2F26" stroke-width="4"/>
+    <line x1="124" y1="80" x2="148" y2="104" stroke="#3B2F26" stroke-width="4"/>
+    <line x1="84" y1="104" x2="164" y2="104" stroke="#3B2F26" stroke-width="4"/>
+    <line x1="124" y1="106" x2="124" y2="156" stroke="#3B2F26" stroke-width="3"/>
+    <rect x="150" y="66" width="14" height="40" fill="#9B5B43"/>
+    <rect x="100" y="150" width="20" height="36" fill="#3B2F26"/>
+    <g stroke="#3B2F26" stroke-width="2">
+      <rect x="132" y="114" width="22" height="28" fill="${GLASS}"/><line x1="143" y1="114" x2="143" y2="142"/><line x1="132" y1="128" x2="154" y2="128"/>
+      <rect x="176" y="138" width="20" height="24" fill="${GLASS}"/><line x1="186" y1="138" x2="186" y2="162"/><line x1="176" y1="150" x2="196" y2="150"/>
+    </g>`,
+  cues:["Techo a dos aguas muy empinado","Vigas de madera decorativas en la fachada (entramado)","Mezcla de estuco claro y ladrillo","Ventanas altas y angostas, chimenea prominente"],
+  materials:[["#4A4742","Pizarra / teja oscura"],["#E8E0D0","Estuco crema"],["#9B5B43","Ladrillo"],["#3B2F26","Madera de roble"]],
+  interiorDesc:"Adentro manda la madera: vigas oscuras a la vista, una chimenea de piedra como corazón de la sala, vidrios emplomados y textiles ricos. Es cálido, acogedor y con sensación de historia.",
+  interiorPal:{wall:"#E3D9C6",floor:"#6B4A30",sofa:"#7C4A3A",wood:"#3B2F26",accent:"#8A8175",feature:"fireplace"},
+  interiorEls:["Vigas de madera vistas","Chimenea de piedra","Pisos de madera oscura","Detalles en hierro y vitrales"],
+  forWhom:"Para quien ama lo clásico, acogedor y con carácter europeo. En clima cálido conviene cuidar la ventilación.",
+  sales:"Es la casa de cuento europeo: techos empinados, vigas a la vista y mucho carácter. Acogedora y con historia."
+},
+{
+  id:"mediterraneo", name:"Mediterráneo", accent:"#C2562F",
+  tagline:"Tejas rojas, arcos y frescura: la elegancia del sur de Europa.",
+  climate:"Ideal clima cálido",
+  swatches:["#C2562F","#EBD9BE","#D69A4C","#2C2A28"],
+  exterior:ground()+`
+    <rect x="78" y="104" width="128" height="82" fill="#EBD9BE"/>
+    <rect x="200" y="78" width="40" height="108" fill="#EBD9BE"/>
+    <polygon points="70,106 142,78 214,106" fill="#C2562F"/>
+    <polygon points="196,80 220,60 244,80" fill="#C2562F"/>
+    <rect x="196" y="78" width="48" height="6" fill="#A8401F"/>
+    <rect x="70" y="104" width="144" height="6" fill="#A8401F"/>
+    <path d="M104 186 V146 a18 18 0 0 1 36 0 V186 Z" fill="#5b432f"/>
+    <path d="M104 186 V146 a18 18 0 0 1 36 0 V186" fill="none" stroke="#2C2A28" stroke-width="2"/>
+    <g stroke="#2C2A28" stroke-width="1.6" fill="${GLASS}">
+      <path d="M156 150 V132 a10 10 0 0 1 20 0 V150 Z"/>
+      <rect x="208" y="100" width="24" height="30"/><line x1="220" y1="100" x2="220" y2="130"/>
+    </g>
+    <g stroke="#2C2A28" stroke-width="1.6">
+      <line x1="150" y1="170" x2="186" y2="170"/><line x1="155" y1="170" x2="155" y2="186"/><line x1="162" y1="170" x2="162" y2="186"/><line x1="174" y1="170" x2="174" y2="186"/><line x1="181" y1="170" x2="181" y2="186"/>
+    </g>`,
+  cues:["Techo de teja roja de poca pendiente","Arcos en puertas y ventanas","Paredes de estuco claro y herrería","A veces una pequeña torre o balcón"],
+  materials:[["#C2562F","Teja de barro"],["#EBD9BE","Estuco arena"],["#D69A4C","Detalle ocre"],["#2C2A28","Herrería negra"]],
+  interiorDesc:"Pisos de barro tipo saltillo, paredes con textura de yeso, arcos que conectan los ambientes y detalles en hierro forjado. Paleta cálida y terrosa: rústico y elegante a la vez. Le queda perfecto a nuestro clima.",
+  interiorPal:{wall:"#EBD9BE",floor:"#C2562F",sofa:"#C9A36B",wood:"#7a5230",accent:"#C2562F",feature:"arch"},
+  interiorEls:["Pisos de barro / terracota","Paredes con yeso texturizado","Arcos interiores","Hierro forjado y madera cálida"],
+  forWhom:"Clima cálido como el de Honduras le sienta de maravilla. Para clientes que buscan calidez, frescura y elegancia.",
+  sales:"Tejas rojas, arcos y frescura — la elegancia del sur de Europa, ideal para nuestro clima."
+},
+{
+  id:"moderna", name:"Moderna", accent:"#2E3032",
+  tagline:"Líneas rectas, vidrio y espacios abiertos. Limpia y con estatus.",
+  climate:"Ideal clima cálido",
+  swatches:["#2E3032","#B07A45","#F2F1EE","#8FA3AB"],
+  exterior:ground()+`
+    <rect x="70" y="118" width="96" height="68" fill="#F2F1EE"/>
+    <rect x="70" y="118" width="96" height="68" fill="none" stroke="#2E3032" stroke-opacity=".15"/>
+    <rect x="150" y="78" width="92" height="108" fill="#2E3032"/>
+    <rect x="150" y="118" width="92" height="2" fill="#000" opacity=".2"/>
+    <rect x="162" y="90" width="68" height="40" fill="#8FA3AB"/>
+    <line x1="196" y1="90" x2="196" y2="130" stroke="#2E3032" stroke-width="3"/>
+    <rect x="162" y="142" width="68" height="32" fill="#B07A45"/>
+    <g>
+      <rect x="84" y="132" width="42" height="42" fill="#8FA3AB"/>
+      <line x1="105" y1="132" x2="105" y2="174" stroke="#F2F1EE" stroke-width="3"/>
+      <line x1="84" y1="153" x2="126" y2="153" stroke="#F2F1EE" stroke-width="3"/>
+    </g>
+    <rect x="58" y="116" width="120" height="5" fill="#2E3032"/>
+    <rect x="138" y="186" width="60" height="3" fill="#2E3032" opacity=".25"/>`,
+  cues:["Techo plano","Volúmenes geométricos limpios, líneas horizontales","Mucho vidrio y poca decoración","Mezcla de concreto, madera y metal negro"],
+  materials:[["#2E3032","Concreto / metal"],["#F2F1EE","Muro blanco"],["#B07A45","Madera cálida"],["#8FA3AB","Vidrio"]],
+  interiorDesc:"Planta abierta, dobles alturas y ventanales que borran el límite con el exterior. Paleta neutra con toques de madera para dar calidez, líneas limpias y la luz como protagonista.",
+  interiorPal:{wall:"#ECEAE4",floor:"#B89466",sofa:"#6E7479",wood:"#B07A45",accent:"#2E3032",feature:"glass"},
+  interiorEls:["Planta abierta y doble altura","Ventanales de piso a techo","Paleta neutra + madera","Iluminación integrada"],
+  forWhom:"Inversores, profesionales jóvenes y quien busca estatus con líneas limpias y luminosas.",
+  sales:"Líneas rectas, vidrio y espacios abiertos. Limpia, luminosa y con estatus."
+},
+{
+  id:"contemporanea", name:"Contemporánea", accent:"#C08A2D",
+  tagline:"Lo más actual: mezcla de materiales y conexión con el exterior.",
+  climate:"Ideal clima cálido",
+  swatches:["#6E6A63","#6B4A2E","#ECE8E0","#1E1D1B"],
+  exterior:ground()+`
+    <rect x="62" y="128" width="84" height="58" fill="#ECE8E0"/>
+    <polygon points="146,128 146,84 226,108 226,186 146,186" fill="#6E6A63"/>
+    <g>
+      <rect x="158" y="120" width="56" height="56" fill="#6B4A2E"/>
+      <line x1="158" y1="120" x2="214" y2="120" stroke="#ECE8E0" stroke-opacity=".2"/>
+      <line x1="158" y1="134" x2="214" y2="138" stroke="#4f3922" stroke-width="2"/>
+      <line x1="158" y1="148" x2="214" y2="152" stroke="#4f3922" stroke-width="2"/>
+      <line x1="158" y1="162" x2="214" y2="166" stroke="#4f3922" stroke-width="2"/>
+    </g>
+    <rect x="150" y="92" width="74" height="20" fill="#1E1D1B"/>
+    <rect x="78" y="140" width="40" height="46" fill="#1E1D1B"/>
+    <rect x="84" y="146" width="28" height="34" fill="${GLASS}"/>
+    <line x1="98" y1="146" x2="98" y2="180" stroke="#1E1D1B" stroke-width="2.5"/>
+    <rect x="124" y="158" width="16" height="28" fill="#6B4A2E"/>
+    <rect x="56" y="186" width="180" height="3" fill="#1E1D1B" opacity=".22"/>`,
+  cues:["Formas asimétricas, volúmenes desfasados","Mezcla deliberada de materiales y texturas","Fuerte conexión interior–exterior","No sigue una sola regla: “lo de hoy”"],
+  materials:[["#6E6A63","Concreto gris"],["#6B4A2E","Madera (lambrín)"],["#ECE8E0","Muro claro"],["#1E1D1B","Acero negro"]],
+  interiorDesc:"Espacios flexibles que fluyen hacia el patio o jardín, base neutra con piezas que hacen declaración, y mezcla de texturas (madera, piedra, metal). Es el estilo del “a tu gusto”, sin encasillarse.",
+  interiorPal:{wall:"#E8E4DC",floor:"#8a6a45",sofa:"#4f5a52",wood:"#6B4A2E",accent:"#C08A2D",feature:"glass"},
+  interiorEls:["Espacios flexibles e interconectados","Mezcla de texturas y materiales","Pieza statement como foco","Conexión con patio o jardín"],
+  forWhom:"Para quien quiere algo único y actual, hecho a su medida, sin atarse a un solo estilo.",
+  sales:"Lo más actual: mezcla de materiales y conexión con el exterior. Única, hecha a tu gusto."
+},
+{
+  id:"minimalista", name:"Minimalista", accent:"#57514a",
+  tagline:"Menos es más: pura, ordenada y serena. Lujo en la simpleza.",
+  climate:"Ideal clima cálido",
+  swatches:["#F4F3F0","#C9C6BF","#252320","#D8C7A8"],
+  exterior:ground()+`
+    <rect x="92" y="92" width="136" height="94" fill="#F4F3F0"/>
+    <rect x="92" y="92" width="136" height="94" fill="none" stroke="#252320" stroke-opacity=".12"/>
+    <rect x="84" y="90" width="152" height="5" fill="#252320"/>
+    <rect x="118" y="120" width="6" height="50" fill="#252320"/>
+    <rect x="196" y="112" width="22" height="64" fill="#252320"/>
+    <rect x="200" y="116" width="14" height="56" fill="#C9C6BF"/>
+    <rect x="138" y="146" width="40" height="40" fill="#D8C7A8"/>
+    <rect x="146" y="120" width="34" height="14" fill="#252320"/>
+    <rect x="70" y="186" width="180" height="3" fill="#252320" opacity=".2"/>`,
+  cues:["Cero ornamento, una o dos formas puras","Monocromático (blancos y grises)","Ventanas como recortes precisos","Todo se ve liso, sin sobresaltos"],
+  materials:[["#F4F3F0","Blanco mate"],["#C9C6BF","Gris claro"],["#252320","Negro suave"],["#D8C7A8","Roble pálido"]],
+  interiorDesc:"Interiores monocromáticos, con almacenamiento oculto y muy pocas piezas, todas de buena calidad. Mucho espacio vacío que respira, luz natural abundante y la filosofía de “menos pero mejor”.",
+  interiorPal:{wall:"#F2F1EE",floor:"#D8C7A8",sofa:"#D7D3CB",wood:"#C9B896",accent:"#25231F",feature:"glass"},
+  interiorEls:["Paleta monocromática","Almacenamiento oculto, sin desorden","Pocas piezas, alta calidad","Espacio vacío y luz natural"],
+  forWhom:"Amantes del orden, la calma y el lujo discreto. Donde “menos pero mejor” es la regla.",
+  sales:"Menos es más: pura, ordenada y serena. Lujo en la simpleza."
+},
+{
+  id:"colonial", name:"Colonial", accent:"#B5532E",
+  tagline:"Equilibrio, simetría y tradición. Una casa señorial atemporal.",
+  climate:"Ideal clima cálido",
+  swatches:["#E4D2B0","#F3EEE3","#B5532E","#4A3522"],
+  exterior:ground()+`
+    <rect x="74" y="106" width="172" height="80" fill="#E4D2B0"/>
+    <polygon points="66,108 160,74 254,108" fill="#B5532E"/>
+    <rect x="66" y="106" width="188" height="6" fill="#94401F"/>
+    <rect x="150" y="78" width="20" height="22" fill="#E4D2B0"/>
+    <polygon points="146,80 160,68 174,80" fill="#B5532E"/>
+    <rect x="150" y="148" width="20" height="38" fill="#4A3522"/>
+    <path d="M150 148 a10 10 0 0 1 20 0" fill="none" stroke="#4A3522" stroke-width="3"/>
+    <rect x="130" y="148" width="6" height="38" fill="#F3EEE3"/>
+    <rect x="184" y="148" width="6" height="38" fill="#F3EEE3"/>
+    <g stroke="#4A3522" stroke-width="1.8" fill="${GLASS}">
+      <rect x="92" y="120" width="24" height="32"/><line x1="104" y1="120" x2="104" y2="152"/><line x1="92" y1="136" x2="116" y2="136"/>
+      <rect x="204" y="120" width="24" height="32"/><line x1="216" y1="120" x2="216" y2="152"/><line x1="204" y1="136" x2="228" y2="136"/>
+    </g>
+    <rect x="86" y="116" width="36" height="4" fill="#94401F"/>
+    <rect x="198" y="116" width="36" height="4" fill="#94401F"/>`,
+  cues:["Fachada perfectamente simétrica","Puerta al centro, ventanas a juego a los lados","Columnas o pórtico, proporciones equilibradas","Techo de teja, aire formal y tradicional"],
+  materials:[["#E4D2B0","Muro arena"],["#F3EEE3","Marcos blancos"],["#B5532E","Teja de barro"],["#4A3522","Madera noble"]],
+  interiorDesc:"Habitaciones formales y simétricas, vigas de madera, arcos y acentos en azulejo tipo talavera. Mobiliario tradicional y una atmósfera cálida y señorial que no pasa de moda.",
+  interiorPal:{wall:"#EDE3D0",floor:"#B5532E",sofa:"#8a6f4e",wood:"#4A3522",accent:"#2C6E91",feature:"arch"},
+  interiorEls:["Ambientes simétricos y formales","Vigas de madera","Azulejo / talavera de acento","Mobiliario tradicional"],
+  forWhom:"Familias tradicionales y quien valora la herencia, la formalidad y lo atemporal.",
+  sales:"Equilibrio, simetría y tradición. Una casa señorial que nunca pasa de moda."
+},
+{
+  id:"rustica", name:"Rústica / chalet", accent:"#5A3D27",
+  tagline:"Piedra, madera y calidez de montaña. Tu refugio para desconectar.",
+  climate:"Mejor clima fresco",
+  swatches:["#8C857A","#5A3D27","#3C4A33","#E7DECB"],
+  exterior:ground()+`
+    <polygon points="160,46 244,128 76,128" fill="#5A3D27"/>
+    <polygon points="160,58 232,128 88,128" fill="#7a5638"/>
+    <rect x="92" y="128" width="136" height="58" fill="#8C857A"/>
+    ${(function(){let s='';for(let r=0;r<3;r++){for(let c=0;c<6;c++){const x=96+c*22+(r%2?10:0); s+=`<rect x="${x}" y="${132+r*18}" width="18" height="14" rx="3" fill="#7a746a"/>`;}}return s;})()}
+    <polygon points="160,72 196,108 124,108" fill="#E7DECB"/>
+    <line x1="160" y1="74" x2="160" y2="108" stroke="#5A3D27" stroke-width="3"/>
+    <line x1="160" y1="86" x2="138" y2="108" stroke="#5A3D27" stroke-width="3"/>
+    <line x1="160" y1="86" x2="182" y2="108" stroke="#5A3D27" stroke-width="3"/>
+    <rect x="150" y="150" width="22" height="36" fill="#3a2817"/>
+    <g stroke="#3a2817" stroke-width="2" fill="${GLASS}">
+      <rect x="106" y="146" width="24" height="26"/><line x1="118" y1="146" x2="118" y2="172"/><line x1="106" y1="159" x2="130" y2="159"/>
+      <rect x="192" y="146" width="24" height="26"/><line x1="204" y1="146" x2="204" y2="172"/><line x1="192" y1="159" x2="216" y2="159"/>
+    </g>
+    <rect x="70" y="124" width="180" height="6" fill="#5A3D27"/>`,
+  cues:["Piedra y madera a la vista","Techo a dos aguas inclinado, aleros amplios","Sensación de cabaña o casa de campo","Materiales naturales, tonos tierra"],
+  materials:[["#8C857A","Piedra"],["#5A3D27","Madera / timber"],["#3C4A33","Verde bosque"],["#E7DECB","Crema natural"]],
+  interiorDesc:"Piedra y madera por todos lados, vigas vistas y una gran chimenea como centro. Textiles cálidos, sensación de cabaña y materiales naturales que invitan a quedarse.",
+  interiorPal:{wall:"#E7DECB",floor:"#5A3D27",sofa:"#6f5a44",wood:"#5A3D27",accent:"#8A8175",feature:"fireplace"},
+  interiorEls:["Piedra y madera vistas","Vigas en el techo","Chimenea como centro","Textiles cálidos, tonos tierra"],
+  forWhom:"Casas de campo, fincas y clima fresco. Para quien busca refugio, naturaleza y calidez.",
+  sales:"Piedra, madera y calidez de montaña. Tu refugio para desconectarte."
+},
+{
+  id:"industrial", name:"Industrial", accent:"#8C4A37",
+  tagline:"Materiales crudos, techos altos y estilo loft. Urbana y con fuerza.",
+  climate:"Versátil",
+  swatches:["#4B4E52","#A7A39B","#8C4A37","#1B1A19"],
+  exterior:ground()+`
+    <rect x="72" y="96" width="92" height="90" fill="#8C4A37"/>
+    ${(function(){let s='';for(let r=0;r<5;r++){for(let c=0;c<5;c++){const x=76+c*18+(r%2?9:0); s+=`<rect x="${x}" y="${100+r*17}" width="15" height="12" fill="#7a3f2f"/>`;}}return s;})()}
+    <rect x="164" y="112" width="84" height="74" fill="#A7A39B"/>
+    <rect x="72" y="92" width="176" height="6" fill="#1B1A19"/>
+    <rect x="164" y="108" width="84" height="6" fill="#1B1A19"/>
+    <g fill="${GLASS}" stroke="#1B1A19" stroke-width="2">
+      <rect x="88" y="120" width="58" height="44"/>
+    </g>
+    <g stroke="#1B1A19" stroke-width="1.6">
+      <line x1="107" y1="120" x2="107" y2="164"/><line x1="126" y1="120" x2="126" y2="164"/>
+      <line x1="88" y1="135" x2="146" y2="135"/><line x1="88" y1="150" x2="146" y2="150"/>
+    </g>
+    <g fill="${GLASS}" stroke="#1B1A19" stroke-width="2">
+      <rect x="178" y="122" width="26" height="36"/><rect x="210" y="122" width="26" height="36"/>
+    </g>
+    <line x1="191" y1="122" x2="191" y2="158" stroke="#1B1A19" stroke-width="1.6"/>
+    <line x1="223" y1="122" x2="223" y2="158" stroke="#1B1A19" stroke-width="1.6"/>
+    <rect x="192" y="160" width="24" height="26" fill="#1B1A19"/>`,
+  cues:["Materiales crudos a la vista: ladrillo, concreto, acero","Ventanales con marcos negros tipo cuadrícula","Techos altos, estética de loft o bodega","Casi nada de revestimiento o pintura"],
+  materials:[["#4B4E52","Acero"],["#A7A39B","Concreto crudo"],["#8C4A37","Ladrillo visto"],["#1B1A19","Marcos negros"]],
+  interiorDesc:"Ladrillo, concreto y ductos a la vista, acero combinado con madera recuperada. Espacios tipo loft, abiertos y altos, con focos Edison y una estética cruda pero con mucho estilo.",
+  interiorPal:{wall:"#A7A39B",floor:"#6b6258",sofa:"#4B4E52",wood:"#7a5a3a",accent:"#8C4A37",feature:"brick"},
+  interiorEls:["Ladrillo y concreto expuestos","Ductos y estructura a la vista","Acero + madera recuperada","Focos Edison, planta tipo loft"],
+  forWhom:"Gustos urbanos, lofts y locales comerciales. Jóvenes y creativos que quieren personalidad.",
+  sales:"Materiales crudos, techos altos y estilo loft. Urbana, fuerte y con personalidad."
+}
+];
+
+const CUE_GUIDE=[
+  ["¿Techo plano + mucho vidrio?","Moderna / Minimalista"],
+  ["¿Tejas rojas + arcos?","Mediterráneo / Colonial"],
+  ["¿Vigas de madera en la fachada?","Tudor"],
+  ["¿Piedra + madera + techo inclinado?","Rústica / chalet"],
+  ["¿Ladrillo o concreto crudo + marcos negros?","Industrial"],
+  ["¿Fachada simétrica y formal?","Colonial"],
+  ["¿Formas asimétricas, materiales mezclados?","Contemporánea"]
+];
+
+/* ---------- interior vignette ---------- */
+function brickLines(x,y,w,h){
+  let s='';const bh=12;
+  for(let r=0;r*bh<h;r++){
+    const yy=y+r*bh;
+    s+=`<line x1="${x}" y1="${yy}" x2="${x+w}" y2="${yy}" stroke="#000" stroke-opacity=".18" stroke-width="1"/>`;
+    for(let c=0;c*26<w;c++){const xx=x+c*26+(r%2?13:0); if(xx<x+w)s+=`<line x1="${xx}" y1="${yy}" x2="${xx}" y2="${yy+bh}" stroke="#000" stroke-opacity=".18" stroke-width="1"/>`;}
+  }
+  return s;
+}
+function interiorSVG(p){
+  let feat='';
+  if(p.feature==='glass'){
+    feat=`<rect x="182" y="34" width="98" height="86" fill="#C9DDE2"/>
+      <rect x="182" y="34" width="98" height="86" fill="none" stroke="${p.wood}" stroke-width="5"/>
+      <line x1="231" y1="34" x2="231" y2="120" stroke="${p.wood}" stroke-width="3"/>
+      <line x1="182" y1="77" x2="280" y2="77" stroke="${p.wood}" stroke-width="3"/>`;
+  }else if(p.feature==='arch'){
+    feat=`<path d="M188 120 V72 a42 42 0 0 1 84 0 V120 Z" fill="#C9DDE2"/>
+      <path d="M188 120 V72 a42 42 0 0 1 84 0 V120" fill="none" stroke="${p.wood}" stroke-width="6"/>`;
+  }else if(p.feature==='fireplace'){
+    feat=`<rect x="190" y="56" width="86" height="66" fill="${p.accent}"/>
+      <rect x="208" y="80" width="50" height="42" fill="#241c16"/>
+      <rect x="182" y="48" width="102" height="11" fill="${p.wood}"/>
+      <polygon points="222,122 233,92 244,122" fill="#E8853A"/>
+      <polygon points="236,122 244,100 252,122" fill="#F2A93C"/>`;
+  }else if(p.feature==='brick'){
+    feat=`<rect x="176" y="28" width="108" height="96" fill="${p.accent}"/>`+brickLines(176,28,108,96);
+  }
+  return `<svg viewBox="0 0 320 208" role="img" aria-label="Vista del interior">
+    <rect x="0" y="0" width="320" height="150" fill="${p.wall}"/>
+    <rect x="0" y="150" width="320" height="58" fill="${p.floor}"/>
+    <rect x="0" y="148" width="320" height="4" fill="#000" opacity=".12"/>
+    ${feat}
+    <ellipse cx="118" cy="180" rx="96" ry="15" fill="${p.accent}" opacity=".22"/>
+    <rect x="50" y="118" width="140" height="32" rx="7" fill="${p.sofa}"/>
+    <rect x="50" y="94" width="140" height="30" rx="9" fill="${p.sofa}"/>
+    <rect x="42" y="108" width="16" height="42" rx="6" fill="${p.sofa}"/>
+    <rect x="182" y="108" width="16" height="42" rx="6" fill="${p.sofa}"/>
+    <rect x="74" y="100" width="50" height="22" rx="6" fill="#000" opacity=".08"/>
+    <rect x="126" y="100" width="50" height="22" rx="6" fill="#000" opacity=".08"/>
+    <line x1="252" y1="0" x2="252" y2="42" stroke="${p.wood}" stroke-width="2"/>
+    <path d="M239 42 H265 L259 58 H245 Z" fill="${p.accent}"/>
+    <rect x="86" y="150" width="62" height="8" rx="2" fill="${p.wood}"/>
+    <rect x="92" y="158" width="6" height="15" fill="${p.wood}"/>
+    <rect x="136" y="158" width="6" height="15" fill="${p.wood}"/>
+    <rect x="288" y="120" width="22" height="30" rx="2" fill="${p.wood}"/>
+    <path d="M299 120 q-19 -27 -2 -46 q15 19 2 46" fill="#5f7a52"/>
+    <path d="M299 120 q17 -23 4 -42 q-13 17 -4 42" fill="#73906a"/>
+  </svg>`;
+}
+
+
+
+/* ---------------- estado ---------------- */
+const NUM="50495086729";
+const state={cuartos:3,banos:2,vehiculos:1,pisos:"1 planta",terreno:"Sí, ya tengo terreno",ubicacion:"",estiloId:null,notas:""};
+const STEPPERS=[
+  {key:"cuartos",label:"Habitaciones",icon:"fa-bed",min:1,max:12},
+  {key:"banos",label:"Baños",icon:"fa-bath",min:1,max:8},
+  {key:"vehiculos",label:"Espacio para vehículos",icon:"fa-car",min:0,max:6}
+];
+
+/* ---------------- steppers ---------------- */
+const stEl=document.getElementById('steppers');
+STEPPERS.forEach(s=>{
+  const row=document.createElement('div');
+  row.className="flex items-center justify-between bg-gray-50 rounded-xl p-4 border border-gray-200";
+  row.innerHTML=`
+    <div class="flex items-center gap-3">
+      <span class="w-11 h-11 rounded-xl bg-orange-100 accent-color flex items-center justify-center text-lg"><i class="fas ${s.icon}"></i></span>
+      <span class="font-bold main-color">${s.label}</span>
+    </div>
+    <div class="flex items-center gap-3">
+      <button type="button" class="step-btn" data-k="${s.key}" data-d="-1" aria-label="Menos ${s.label}">−</button>
+      <span id="v-${s.key}" class="w-8 text-center text-2xl font-black main-color font-poppins">${state[s.key]}</span>
+      <button type="button" class="step-btn" data-k="${s.key}" data-d="1" aria-label="Más ${s.label}">+</button>
+    </div>`;
+  stEl.appendChild(row);
+});
+stEl.addEventListener('click',e=>{
+  const b=e.target.closest('.step-btn'); if(!b)return;
+  const k=b.dataset.k, d=+b.dataset.d, cfg=STEPPERS.find(x=>x.key===k);
+  state[k]=Math.min(cfg.max,Math.max(cfg.min,state[k]+d));
+  document.getElementById('v-'+k).textContent=state[k];
+  updateResumen();
+});
+
+/* ---------------- segmentos (pisos / terreno) ---------------- */
+document.querySelectorAll('.seg').forEach(seg=>{
+  const field=seg.dataset.field;
+  seg.addEventListener('click',e=>{
+    const o=e.target.closest('.seg-opt'); if(!o)return;
+    seg.querySelectorAll('.seg-opt').forEach(x=>x.classList.remove('active'));
+    o.classList.add('active');
+    state[field]=o.dataset.val;
+    updateResumen();
+  });
+});
+
+/* ---------------- galería de estilos ---------------- */
+const gal=document.getElementById('gallery');
+STYLES.forEach((s,i)=>{
+  const c=document.createElement('div');
+  c.className="style-card card-shadow"; c.dataset.id=s.id; c.tabIndex=0;
+  c.setAttribute('role','button'); c.setAttribute('aria-pressed','false');
+  c.setAttribute('aria-label','Seleccionar estilo '+s.name);
+  c.innerHTML=`
+    <div class="frame">
+      <span class="clim">${s.climate}</span>
+      <span class="check"><i class="fas fa-check"></i></span>
+      <svg class="house" viewBox="0 0 320 220" role="img" aria-label="Fachada ${s.name}">${s.exterior}</svg>
+    </div>
+    <div class="p-5">
+      <h3 class="text-xl font-bold main-color font-poppins mb-1">${s.name}</h3>
+      <p class="text-sm text-gray-500 mb-4 leading-snug">${s.tagline}</p>
+      <div class="sw flex gap-1.5 mb-4">${s.swatches.map(c=>`<span style="background:${c}"></span>`).join('')}</div>
+      <button type="button" class="ver text-sm font-bold accent-color flex items-center gap-2 hover:underline"><i class="fas fa-eye"></i> Ver interior</button>
+    </div>`;
+  c.addEventListener('click',e=>{ if(e.target.closest('.ver'))return; selectStyle(s.id); });
+  c.addEventListener('keydown',e=>{ if(e.key==='Enter'||e.key===' '){e.preventDefault();selectStyle(s.id);} });
+  c.querySelector('.ver').addEventListener('click',e=>{e.stopPropagation();openModal(i);});
+  gal.appendChild(c);
+});
+function selectStyle(id){
+  state.estiloId=id;
+  document.querySelectorAll('.style-card').forEach(c=>{
+    const on=c.dataset.id===id;
+    c.classList.toggle('sel',on);
+    c.setAttribute('aria-pressed',on?'true':'false');
+  });
+  updateResumen();
+}
+
+/* ---------------- resumen en vivo ---------------- */
+function styleName(){const s=STYLES.find(x=>x.id===state.estiloId);return s?s.name:null;}
+function updateResumen(){
+  const est=styleName();
+  let t=`${state.cuartos} habitación${state.cuartos!=1?'es':''} · ${state.banos} baño${state.banos!=1?'s':''} · ${state.vehiculos} vehículo${state.vehiculos!=1?'s':''} · ${state.pisos}`;
+  t+= est? ` · estilo <span class="accent-color font-bold">${est}</span>` : ` · <span class="text-gray-400">(falta elegir estilo)</span>`;
+  document.getElementById('resumen').innerHTML=t;
+}
+updateResumen();
+
+/* ---------------- modal ---------------- */
+const scrim=document.getElementById('scrim'), modal=document.getElementById('modal');
+let lastFocus=null;
+function openModal(i){
+  const s=STYLES[i]; lastFocus=document.activeElement;
+  const selected = state.estiloId===s.id;
+  modal.innerHTML=`
+    <div class="relative bg-gray-50 p-6 md:p-8 border-b border-gray-100 grid md:grid-cols-2 gap-6 items-center">
+      <button id="x" aria-label="Cerrar" class="absolute top-4 right-4 w-10 h-10 rounded-full bg-white border border-gray-200 text-gray-500 hover:text-gray-900 flex items-center justify-center"><i class="fas fa-times"></i></button>
+      <div><svg viewBox="0 0 320 220" class="w-full h-auto rounded-xl bg-white" role="img" aria-label="Fachada ${s.name}">${s.exterior}</svg>
+        <p class="text-xs text-gray-400 mt-2 font-bold uppercase tracking-wider">Fachada</p></div>
+      <div>
+        <span class="clim" style="position:static;display:inline-block;margin-bottom:10px">${s.climate}</span>
+        <h2 id="m-title" class="text-3xl md:text-4xl font-black main-color leading-tight">${s.name}</h2>
+        <p class="text-gray-600 mt-3">${s.tagline}</p>
+      </div>
+    </div>
+    <div class="p-6 md:p-8 grid md:grid-cols-2 gap-7">
+      <div>
+        <h4 class="text-sm font-black uppercase tracking-wider accent-color mb-3">Cómo reconocerlo</h4>
+        <ul class="space-y-2 mb-7">${s.cues.map(x=>`<li class="text-sm text-gray-700 flex gap-2"><i class="fas fa-check accent-color mt-1 text-xs"></i><span>${x}</span></li>`).join('')}</ul>
+        <h4 class="text-sm font-black uppercase tracking-wider accent-color mb-3">Materiales de fachada</h4>
+        <div class="flex flex-wrap gap-2">${s.materials.map(([c,n])=>`<span class="inline-flex items-center gap-2 text-xs font-medium text-gray-600 border border-gray-200 rounded-lg px-2.5 py-1.5"><span style="width:15px;height:15px;border-radius:4px;background:${c};display:inline-block;border:1px solid rgba(0,0,0,.1)"></span>${n}</span>`).join('')}</div>
+      </div>
+      <div>
+        <h4 class="text-sm font-black uppercase tracking-wider accent-color mb-3">El interior</h4>
+        <p class="text-sm text-gray-700 mb-3">${s.interiorDesc}</p>
+        <svg viewBox="0 0 320 208" class="w-full h-auto rounded-xl border border-gray-200" role="img" aria-label="Interior ${s.name}">${interiorSVG(s.interiorPal)}</svg>
+        <ul class="grid grid-cols-1 gap-1.5 mt-4">${s.interiorEls.map(x=>`<li class="text-sm text-gray-700 flex gap-2"><i class="fas fa-circle accent-color mt-1.5" style="font-size:5px"></i><span>${x}</span></li>`).join('')}</ul>
+      </div>
+      <div class="md:col-span-2 bg-orange-50 border-l-4 border-accent rounded-r-xl p-5">
+        <p class="text-xs font-black uppercase tracking-wider text-gray-500 mb-1">Para el asesor · cómo describírselo</p>
+        <p class="text-lg main-color font-medium">“${s.sales}”</p>
+      </div>
+      <button type="button" id="pick" class="md:col-span-2 w-full ${selected?'bg-green-600':'bg-accent hover:bg-accent-dark'} text-white px-8 py-4 rounded-xl text-lg font-bold transition-all flex items-center justify-center gap-3">
+        <i class="fas ${selected?'fa-check':'fa-hand-pointer'}"></i> ${selected?'Estilo seleccionado':'Elegir este estilo'}
+      </button>
+    </div>`;
+  scrim.classList.add('open'); document.body.style.overflow='hidden'; scrim.scrollTop=0;
+  document.getElementById('x').focus();
+  document.getElementById('x').onclick=closeModal;
+  document.getElementById('pick').onclick=()=>{selectStyle(s.id);closeModal();
+    document.querySelector('#enviar').scrollIntoView({behavior:'smooth',block:'center'});};
+}
+function closeModal(){scrim.classList.remove('open');document.body.style.overflow='';if(lastFocus)lastFocus.focus();}
+scrim.addEventListener('click',e=>{if(e.target===scrim)closeModal();});
+document.addEventListener('keydown',e=>{if(e.key==='Escape'&&scrim.classList.contains('open'))closeModal();});
+
+/* ---------------- envío a WhatsApp ---------------- */
+document.getElementById('enviar').addEventListener('click',()=>{
+  state.ubicacion=document.getElementById('ubicacion').value.trim();
+  state.notas=document.getElementById('notas').value.trim();
+  if(!state.estiloId){document.getElementById('gallery').scrollIntoView({behavior:'smooth',block:'start'});return;}
+
+  const terr = state.ubicacion ? `${state.terreno} (${state.ubicacion})` : state.terreno;
+  let msg =`🏠 *MI CASA IDEAL — Constructora Invar*\n\n`;
+  msg+=`✨ *Estilo:* ${styleName()}\n`;
+  msg+=`🛏️ *Habitaciones:* ${state.cuartos}\n`;
+  msg+=`🚿 *Baños:* ${state.banos}\n`;
+  msg+=`🚗 *Vehículos:* ${state.vehiculos}\n`;
+  msg+=`🏢 *Niveles:* ${state.pisos}\n`;
+  msg+=`📍 *Terreno:* ${terr}\n`;
+  if(state.notas) msg+=`\n📝 *Notas:* ${state.notas}\n`;
+  msg+=`\nQuisiera más información sobre este proyecto. ¡Gracias!`;
+
+  window.open(`https://wa.me/${NUM}?text=${encodeURIComponent(msg)}`,'_blank');
+});
+
+/* ---------------- reveal on scroll ---------------- */
+const io=new IntersectionObserver((es)=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('active');io.unobserve(e.target);}}),{threshold:.12});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+</script>
+</body>
+</html>
